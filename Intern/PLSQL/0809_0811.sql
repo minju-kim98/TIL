@@ -5,7 +5,14 @@ SET SERVEROUTPUT ON
 
 /*------------------------------------------------------------*/
 -- index
--- https://hyunipad.tistory.com/72
+CREATE INDEX [인덱스명] ON [테이블명](컬럼1, 컬럼2, 컬럼3, .......)
+SELECT * FROM USER_INDEXES
+DROP [인덱스 명]
+
+--automatic indexing
+EXEC DBMS_AUTO_INDEX.CONFIGURE('AUTO_INDEX_MODE','IMPLEMENT');
+EXEC DBMS_AUTO_INDEX.CONFIGURE('AUTO_INDEX_MODE','REPORT ONLY'); --cannot see index
+EXEC DBMS_AUTO_INDEX.CONFIGURE('AUTO_INDEX_MODE','OFF');
 
 /*------------------------------------------------------------*/
 -- object type
