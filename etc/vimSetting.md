@@ -4,7 +4,6 @@
 ``` ~/.vimrc ``` 파일을 편집해서 vim 에디터의 설정을 바꿀 수 있다.
 
 ## 기본 세팅
-</br>
 
 ### **Syntax highlighting**
 ```
@@ -12,7 +11,6 @@ if has ("Syntax")
     syntax on
 endif
 ```
-</br>
 
 ### **colorscheme(테마) - iceberg**
 1. 원하는 테마를 다운받는다. (github에서 바로 다운 받는 경우,  ```iceberg.vim``` 파일을 다운받으면 된다.)
@@ -34,14 +32,12 @@ colorscheme iceberg
 ```
 * 더 많은 colorscheme은 구글에 ```vim colorscheme```을 검색하면 나온다.
 </br>
-</br>
 
 ### **줄 번호 표시**
 ```
 set nu
 ```
 = ```set number```
-</br>
 </br>
 
 ### **자동 인덴트**
@@ -57,7 +53,6 @@ set pastetoggle=<F2>
 = ```set smartindent``` (if, for와 같은 것을 입력하고 다음 line으로 넘어갈 시의 들여쓰기)</br>
 ```set paste```: set ai, set si등으로 인해 붙여넣기를 하면 계단현상이 나타날 수 있는데, 이것을 방지해준다.</br>
 ```set pastetoggle=<F2>```: paste 옵션이 적용되면 들여쓰기 옵션이 제대로 작동하지 않기 때문에, toggle식으로 옵션을 키고 끌 수 있다. </br>
-</br>
 
 ### **인덴트 너비**
 아래의 코드는 각각 tab의 너비, tab 키를 눌렀을 때 이동하는 너비, 자동 인덴트할 때의 너비를 설정해준다.
@@ -69,7 +64,6 @@ set sw=4
 = ```set tabstop``` (하나의 tab을 몇 칸으로 할 것인지), </br>
 = ```set softtabstop``` (tab키를 눌렀을 때 몇 칸을 이동할 것인지), </br>
 = ```set shiftwidth``` (<<, >>으로 들여쓰기 시 몇 칸을 이동할 것인지), </br>
-</br>
 
 ### **상태바표시**
 화면 하단에 현재 상태 정보를 보여줄 것인지 설정해준다. </br>
@@ -78,7 +72,6 @@ set sw=4
 set ls=0
 ```
 = ```set laststatus=0``` </br>
-</br>
 
 ### **괄호쌍 표시**
 현재 선택한 괄호쌍을 표시해준다.
@@ -86,7 +79,6 @@ set ls=0
 set sm
 ```
 = ```set showmatch``` </br>
-</br>
 
 
 ### **검색 결과에 highlight 표시**
@@ -97,7 +89,6 @@ set hls
 * 위에 colorscheme을 설치했으면 colorscheme에 맞는 색상으로 highlight가 되어있을 것이고, 설치하지 않았다면 노란색으로 highlight 되어있을것이다.
 * 혹시 몰라 첨부하자면, vim에서 검색은 esc를 누른 뒤, ```/a``` 로 하면 된다. (a를 검색할 때)
 </br>
-</br>
 
 ### **검색 시 대소문자 구분 안함**
 ```
@@ -106,7 +97,6 @@ set scs
 ```
 = ```set ignorecase``` </br>
 = ```set smartcase``` (ignore이 켜져있어도 검색어에 대문자가 있다면 정확히 일치하는 문자열을 찾는다.)</br>
-</br>
 
 ### **찾는 글씨를 칠 때 마다 찾은 내용 표시**
 ```
@@ -135,7 +125,6 @@ au BufReadPost *
 \ exe "norm g`\"" |
 \ endif
 ```
-</br>
 
 ### **Encoding 설정**
 ```
