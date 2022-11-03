@@ -74,5 +74,24 @@ OpenAPI는 제공처(카카오, 네이버, ETRI 등)에서 백엔드를 만들�
 
 ## 1.4 구현하기
 ### Step 1: 카카오 이미지 검색 OpenAPI 호출하기
+카카오 이미지 검색 API를 활용하여, 이미지가 있는 URL을 출력해보자.
+> 링크: https://developers.kakao.com/docs/latest/ko/daum-search/dev-guide#search-image
+
+카카오 이미지 검색 OpenAPI의 Request와 Response 가이드이다. Request에 필요한 URL과 Parameter을 찾을 수 있다.
+```
+GET /v2/search/image HTTP/1.1
+Host: dapi.kakao.com
+Authorization: KakaoAK ${REST_API_KEY}
+```
+요청이 정상 처리 되었다면, documents 필드 내에 image_url이 있을 것인데, 이 정보를 사용하여 파일로 저장하면 사진을 모을 수 있다.
+
 ### Step 2: 이미지 파일 저장하기
+1.3.2에서 구현한 코드를 사용하되, 함수로 만들었다.   
+```main.py``` 파일의 ```save_image``` 함수이다.
+
 ### Step 3: 전체 코드 완성하기
+Step 1, Step 2를 합쳐 전체 코드를 완성할 수 있다.
+
+## 1.5 정리
+* 카카오 이미지 검색 OpenAPI 사용 방법을 배웠다.
+* 이제 쿼리(query)만 바꿔서 다양한 사진을 수집해보자.
