@@ -23,11 +23,11 @@ data = {
 response = requests.post(url, headers = headers, data = data)
 #요청에 실패했다면
 if response.status_code != 200:
-    print(f'error! because {response.json()}')
+    print(f"error! because {response.json()}")
 else:
     count = 0
-    for image_info in response.json()['documents']:
-        print(f'[{count}th] image_url =', image_info['image_url'])
+    for image_info in response.json()["documents"]:
+        print(f"[{count}th] image_url =", image_info["image_url"])
         count += 1
         file_name = "test_%d.jpg" %(count)
-        save_image(image_info['image_url'], file_name)
+        save_image(image_info["image_url"], file_name)
