@@ -29,3 +29,5 @@ else:
     for image_info in response.json()['documents']:
         print(f'[{count}th] image_url =', image_info['image_url'])
         count += 1
+        file_name = "test_%d.jpg" %(count)
+        save_image(image_info['image_url'], file_name)
