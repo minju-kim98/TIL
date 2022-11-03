@@ -1,5 +1,13 @@
 import requests
 import json
+import os
+
+def createDirectory(directory):
+    try:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+    except OSError:
+        print("Error: Failed to create the directory.")
 
 def save_image(image_url, file_name):
     """
@@ -26,8 +34,11 @@ if response.status_code != 200:
     print(f"error! because {response.json()}")
 else:
     count = 0
+    current_path = os.getcwd()
+    save_path = current_path + "/" + data["query"]
+    createDirectory(save_path)
     for image_info in response.json()["documents"]:
         print(f"[{count}th] image_url =", image_info["image_url"])
         count += 1
-        file_name = "test_%d.jpg" %(count)
+        file_name = save_path + "/" + "test_%d.jpg" %(count)
         save_image(image_info["image_url"], file_name)
