@@ -15,7 +15,7 @@
 
 ## 1.3 사전 지식 쌓기
 ### 1.3.1 파일 읽고 쓰기
-```
+```python
 # 파일 쓰기
 data = "hello"
 with open("test.txt", "w") as fp:
@@ -28,7 +28,7 @@ with open("test.txt", "r") as fp:
 ```
 
 ### 1.3.2 웹에 있는 이미지 파일을 저장하는 방법
-```
+```python
 # 이미지가 있는 url 주소
 url = "https://search1.kakaocdn.net/argon/600x0_65_wr/ImZk3b2X1w8"
 
