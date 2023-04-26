@@ -21,10 +21,10 @@ It's also uploaded at https://github.com/Eun-Sook-Kim/doit_html_css_javascript
     * 05 입력 양식 작성하기
 * CSS
     * 06 CSS의 기본
-    * 07 텍스트를 표현하는 다양한 스타일
 
 ### DAY 03 (2023-04-26, WED)
 * CSS
+    * 07 텍스트를 표현하는 다양한 스타일
     * 08 레이아웃을 구성하는 CSS 박스 모델
     * 09 이미지와 그라데이션 효과로 배경 꾸미기
     * 10 CSS 고급 선택자
