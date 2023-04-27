@@ -25,28 +25,29 @@ It's also uploaded at https://github.com/Eun-Sook-Kim/doit_html_css_javascript
 ### DAY 03 (2023-04-26, WED)
 * CSS
     * 07 텍스트를 표현하는 다양한 스타일
+* etc
+    * summarize 부분 목록 작성
+
+### DAY 04 (2023-04-27, THU)
+* CSS 
     * 08 레이아웃을 구성하는 CSS 박스 모델
     * 09 이미지와 그라데이션 효과로 배경 꾸미기
     * 10 CSS 고급 선택자
 
-### DAY 04 (2023-04-27, THU)
-* CSS 
+### DAY 05 (2023-04-28, FRI)
+* CSS
     * 11 트렌지션과 애니메이션
     * 12 반응형 웹과 미디어 쿼리
 * JavaScript
     * 13 자바스크립트와 첫 만남
     * 14 자바스크립트 기본 문법
 
-### DAY 05 (2023-04-28, FRI)
+### DAY 06 (2023-04-29, SAT)
 * JavaScript
     * 15 함수와 이벤트
     * 16 자바스크립트와 객체
-
-### DAY 06 (2023-04-29, SAT)
-* JavaScript
     * 17 문서 객체 모델(DOM)
-    * 웹 사이트 만들기 1
 
 ### DAY 07 (2023-04-30, SUN)
 * JavaScript
-    * 웹 사이트 만들기 2
+    * 웹 사이트 만들기 
