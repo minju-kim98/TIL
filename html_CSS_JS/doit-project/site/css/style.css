@@ -1,8 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap');
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+a {
+    text-decoration: none;
+}
+
 #container {
     margin: 0 auto;
     width: 1200px;
@@ -11,7 +18,7 @@
 header{
     width: 100%;
     height: 100px;
-    background-color: blue;
+    background-color: #07c;
 }
 
 /*로고 영역*/
@@ -19,7 +26,15 @@ header{
     float: left;
     width: 250px;
     height: 100px;
-    background-color: indigo;
+    line-height: 100px;
+    padding-left: 20px;
+}
+#logo h1{
+    font-family: 'Merienda', cursive;
+    font-weight: 700;
+    font-size: 40px;
+    color: #fff;
+    text-shadow: 0 -1px 0 #222;
 }
 
 /*네비게이션 영역*/
