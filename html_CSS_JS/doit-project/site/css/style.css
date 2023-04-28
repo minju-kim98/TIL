@@ -10,6 +10,10 @@ a {
     text-decoration: none;
 }
 
+ul{
+    list-style: none;
+}
+
 #container {
     margin: 0 auto;
     width: 1200px;
@@ -42,8 +46,53 @@ nav{
     float: right;
     width: 900px;
     height: 100px;
-    background-color: green;
+    padding-top: 40px;
 }
+#topMenu {  
+    height:60px; 
+}
+#topMenu > li {
+    float:left;  /* 메뉴 항목을 왼쪽으로 플로팅 */ 
+    position: relative;  /* 서브 메뉴를 absolute로 하기 위해, 이 부분을 relative로 */  
+}
+#topMenu > li > a{
+    display:block;  /* 링크 텍스트는 블록으로 */ 
+    color:#fff;  /* 글자 색 */
+    font-weight:600;  /* 글자 굵기 */
+    text-shadow:0 1px #07c;  /* 그림자 추가 */
+    padding:20px 60px;  /* 패딩 */ 
+}
+#topMenu > li > a > span {
+    font-size : 0.5em;   /* 서브 메뉴가 있는 항목에 화살표 표시 */   
+}
+#topMenu > li > a:hover {
+    color:#000;  /* 마우스 오버하면 색상 바뀜 */ 
+    text-shadow:0 -1px #07c;  /* 글자가 너무 굵어지지 않도록 */
+}
+
+#topMenu > li > ul { /* 서브 메뉴 스타일 */
+    display: none;  /* 서브 메뉴 처음에는 화면에 안 보이게 */ 
+    position:absolute;  /* 서브 메뉴 포지셔닝 */ 
+    width:160px;
+    background:rgba(255,255,255,0.6);  /* 슬라이드 쇼 비치도록 배경 색 조절 */
+    left:20px;     
+    margin:0;
+}
+#topMenu > li > ul > li {    
+    padding:10px 10px 10px 30px;   /* 서브 메뉴 항목 */
+}
+#topMenu > li > ul > li > a { 
+    font-size:14px;   
+    padding:10px;
+    color:#000;  
+}
+#topMenu > li:hover > ul {
+    display: block;  /* 메인 메뉴 항목 위로 오버하면 서브 메뉴 표시 */
+    z-index:10;  /* 슬라이드 쇼에 가리지 않게 조절 */ 
+}
+#topMenu > li > ul > li > a:hover {
+    color:#f00;  /* 서브 메뉴 마우스 오버하면 색상 바뀜 */   
+} 
 
 /*이미지 슬라이드 쇼 영역*/
 #slideShow{
