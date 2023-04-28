@@ -31,13 +31,10 @@ It's also uploaded at https://github.com/Eun-Sook-Kim/doit_html_css_javascript
 ### DAY 04 (2023-04-27, THU)
 * CSS 
     * 08 레이아웃을 구성하는 CSS 박스 모델
-    * 09 이미지와 그라데이션 효과로 배경 꾸미기
-    * 10 CSS 고급 선택자
 
 ### DAY 05 (2023-04-28, FRI)
-* CSS
-    * 11 트렌지션과 애니메이션
-    * 12 반응형 웹과 미디어 쿼리
+* CSS 
+    * 08 레이아웃을 구성하는 CSS 박스 모델
 * JavaScript
     * 13 자바스크립트와 첫 만남
     * 14 자바스크립트 기본 문법
@@ -49,5 +46,10 @@ It's also uploaded at https://github.com/Eun-Sook-Kim/doit_html_css_javascript
     * 17 문서 객체 모델(DOM)
 
 ### DAY 07 (2023-04-30, SUN)
+* CSS
+    * 09 이미지와 그라데이션 효과로 배경 꾸미기
+    * 10 CSS 고급 선택자
+    * 11 트렌지션과 애니메이션
+    * 12 반응형 웹과 미디어 쿼리
 * JavaScript
     * 웹 사이트 만들기 
