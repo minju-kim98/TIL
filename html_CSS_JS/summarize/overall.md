@@ -362,7 +362,7 @@ A:nth-last-of-type(n)|부모 안에 있는 A 요소 중에서 끝에서 n번째 
         <td>지정한 크기 만큼 x축과 y축으로 이동한다.</td>
     </tr>
     <tr>
-        <td>transform: translate(tx, ty, tz)</td>
+        <td>transform: translate3d(tx, ty, tz)</td>
         <td>지정한 크기 만큼 x축, y축, z축으로 이동한다.</td>
     </tr>
     <tr>
@@ -386,7 +386,7 @@ A:nth-last-of-type(n)|부모 안에 있는 A 요소 중에서 끝에서 n번째 
         <td>지정한 크기 만큼 x축과 y축으로 확대, 축소한다.</td>
     </tr>
     <tr>
-        <td>transform: scale(sx, sy, sz)</td>
+        <td>transform: scale3d(sx, sy, sz)</td>
         <td>지정한 크기 만큼 x축, y축, z축으로 확대, 축소한다.</td>
     </tr>
     <tr>
