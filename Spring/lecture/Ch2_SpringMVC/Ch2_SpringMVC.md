@@ -873,8 +873,69 @@ public class RequestMappingTest {
 ```
 
 ## 22. redirect와 forward
+* redirect: 요청이 2번, 응답도 2번
+* forward: 요청 1번, 응답 1번
 
 ## 23. 쿠키(Cookie)란
+* 쿠키를 이용해서 "아이디 기억하기" 기능 구현
+* 쿠키란 이름과 값의 쌍으로 구성된 작은 정보. 아스키 문자만 가능.
+* 서버에서 생성 후 전송, 브라우저에 저장. 유효기간 이후 자동 삭제
+* 서버에 요청 시 domain, path가 일치하는 경우에만 자동 전송
+
+```java
+package com.fastcampus.ch2_2;
+
+import java.net.URLEncoder;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/login")
+public class LoginController {
+	
+	@GetMapping("/login")	// http://localhost:8080/ch2_2/login/login
+	public String loginForm() {
+		return "loginForm";
+	}
+	
+	@PostMapping("/login")	// http://localhost:8080/ch2_2/login/login
+	public String login(String id, String pwd, boolean rememberId, HttpServletResponse response) throws Exception {
+		
+		// 1. id와 pwd 확인
+		if(!loginCheck(id, pwd)) {
+			// 2-1 id와 pwd가 일치하지 않으면, loginForm으로 이동
+			String msg = URLEncoder.encode("id 또는 pwd가 일치하지 않습니다.", "utf-8");
+			return "redirect:/login/login?msg="+msg;
+		}
+		// 2-2 id와 pwd가 일치하면
+		if(rememberId) {
+			// 1. 쿠키를 생성
+			Cookie cookie = new Cookie("id", id);
+			// 2. 응답에 저장
+			response.addCookie(cookie);
+		}
+		else {
+			// 쿠키 삭제
+			Cookie cookie = new Cookie("id", id);
+			cookie.setMaxAge(0);
+			response.addCookie(cookie);
+		}
+			// 3. 홈으로 이동
+		return "redirect:/";
+	}
+
+	private boolean loginCheck(String id, String pwd) {
+		return "asdf".equals(id) && "1234".equals(pwd);
+	}
+}
+
+```
 
 ## 24. 세션(Session) - 이론
 
