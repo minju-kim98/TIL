@@ -940,18 +940,143 @@ public class LoginController {
 ## 24. 세션(Session) - 이론
 
 ## 25. 세션(Session) - 실습(1)
+* 코드 참고
 
 ## 26. 세션(Session) - 실습(2)
+* 코드 참고
+* session이 필요 없는 페이지에는 ```session=false```로 해줘야 session이 유지되는 경우가 조금이라도 줄어듦.
+* ```session=false```는 세션이 끊기는게 아니라 세션이 없을 때 새로운 세션이 생기지 않는 것.
 
 ## 27. 예외처리(1) - 실습
+```java
+package com.fastcampus.ch2_2;
+
+import java.io.FileNotFoundException;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class ExceptionController {
+	
+	@ExceptionHandler(Exception.class)
+	public String catcher(Exception ex, Model m) {
+		m.addAttribute("ex", ex);
+		return "error";
+	}
+	
+	@ExceptionHandler({NullPointerException.class, FileNotFoundException.class})
+	public String catcher2(Exception ex, Model m) {
+		m.addAttribute("ex", ex);
+		return "error";
+	}
+	
+	@RequestMapping("/ex")
+	public String main() throws Exception{
+		throw new Exception("예외가 발생했습니다.");
+	}
+	
+	@RequestMapping("/ex2")
+	public String main2() throws Exception{
+		throw new NullPointerException("예외가 발생했습니다.");
+	}
+}
+```
+
+* 모든 컨트롤러에서 발생하는 예외 처리
+```java
+package com.fastcampus.ch2_2;
+
+import java.io.FileNotFoundException;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+@ControllerAdvice
+// @ControllerAdvice("com.fastcampus.ch2_2")    // 이렇게 패키지 지정도 가능
+public class GlobalCatcher {
+	@ExceptionHandler(Exception.class)
+	public String catcher(Exception ex, Model m) {
+		m.addAttribute("ex", ex);
+		return "error";
+	}
+	
+	@ExceptionHandler({NullPointerException.class, FileNotFoundException.class})
+	public String catcher2(Exception ex, Model m) {
+		m.addAttribute("ex", ex);
+		return "error";
+	}
+}
+```
 
 ## 28. 예외처리(2) - 이론
+### @ResponseStatus
+1. 예외 처리 메서드에서 응답코드는 기본으로 200으로 들어감. 이를 해결해주기 위해 사용.
+2. 사용자 정의 예외 클래스에서 응답코드는 기본으로 500으로 들어감. 이를 바꿔주기 위해 사용.
+```java
+package com.fastcampus.ch2_2;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@Controller
+public class ExceptionController {
+	
+	@ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED) // 응답코드를 405로 바꿈
+	@ExceptionHandler(Exception.class)
+	public String catcher(Exception ex, Model m) {
+		m.addAttribute("ex", ex);
+		return "error";
+	}
+	
+	@RequestMapping("/ex")
+	public String main() throws Exception{
+		throw new Exception("예외가 발생했습니다.");
+	}
+	
+}
+
+```
+
+### web.xml
+```html
+<!-- 에러 페이지, 응답코드별로 작성 가능 -->
+<error-page>
+    <error-code>405</error-code>
+    <location>/error.jsp</location>
+</error-page>
+```
+![Alt text](image-5.png)
 
 ## 29. DispatcherServlet 파헤치기
 
 ## 30. 데이터의 변환과 검증 (1)
+```java
+@InitBinder
+public void toDate(WebDataBinder binder) {
+    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    binder.registerCustomEditor(Date.class, new CustomDateEditor(df, false));
+    binder.registerCustomEditor(String[].class, new StringArrayPropertyEditor("#"));
+    // binder.registerCustomEditor(String[].class, "hobby", new StringArrayPropertyEditor("#"));
+}
+```
+OR
+```java
+@DateTimeFormat(pattern="yyyy-MM-dd")
+private Date birth;
+```
+
+![Alt text](image-6.png)
 
 ## 31. 데이터의 변환과 검증 (2)
+* 코드 참고
 
 ## 32. IntelliJ 설치
 
