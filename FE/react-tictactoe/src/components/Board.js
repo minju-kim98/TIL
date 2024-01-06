@@ -2,14 +2,12 @@ import React from "react";
 import Square from "./Square";
 import "./Board.css";
 
-const Board = ({ squares, onClick }) => {
+const Board = ({ squares, step, onClick }) => {
   const renderSquare = (i) => {
     return <Square value={squares.squares[i]} onClick={() => onClick(i)} />;
   };
 
-  let player = squares.player;
-  if (player === "X") player = "O";
-  else player = "X";
+  const player = step % 2? "O" : "X";
 
   const status = `Next player: ${player}`;
   const win = `Winner is: ${squares.winner}`;

@@ -4,7 +4,7 @@ import Board from "./components/Board";
 
 const App = () => {
   const [history, setHistory] = useState([
-    { squares: Array(9).fill(null), player: "O", winner: null },
+    { squares: Array(9).fill(null), player: "X", winner: null },
   ]);
   const [stepNumber, setStepNumber] = useState(0);
 
@@ -39,6 +39,7 @@ const App = () => {
     const newCurrent = newHistory[newHistory.length - 1];
     const newSquares = newCurrent.squares.slice();
     const tmpWin = newCurrent.winner;
+    if (tmpWin !== null) return;
 
     if (newSquares[i] === null) {
       if (stepNumber % 2) {
@@ -48,7 +49,6 @@ const App = () => {
       }
       newSquares[i] = newCurrent.player;
       newCurrent.winner = calculateWinner(newSquares);
-      if (tmpWin !== null) return;
 
       setHistory([
         ...newHistory,
@@ -70,7 +70,9 @@ const App = () => {
     const desc = move ? "Go to move #" + move : "Go to game start";
     return (
       <li key={move}>
-        <button className="move-button" onClick={() => jumpTo(move)}>{desc}</button>
+        <button className="move-button" onClick={() => jumpTo(move)}>
+          {desc}
+        </button>
       </li>
     );
   });
@@ -79,7 +81,7 @@ const App = () => {
     <div className="game">
       <h1>Tic Tac Toe</h1>
       <div className="game-board">
-        <Board squares={current} onClick={(i) => handleClick(i)} />
+        <Board squares={current} step={stepNumber} onClick={(i) => handleClick(i) } />
       </div>
       <div className="game-info">
         <div>{moves}</div>
