@@ -1,11 +1,14 @@
-import { useContext, useState } from "react";
-import { collection, addDoc } from "firebase/firestore"; 
+import { useContext, useEffect, useState } from "react";
+import { doc, collection, addDoc, updateDoc, getDoc } from "firebase/firestore"; 
 import { db } from "firebaseApp";
 import AuthContext from "context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {toast} from "react-toastify";
+import { PostProps } from "./PostList";
 
 export default function PostForm() {
+  const id = useParams()?.id;
+  const [post, setPost] = useState<PostProps | null>(null);
   const [title, setTitle] = useState<string>("");
   const [summary, setSummary] = useState<string>("");
   const [content, setContent] = useState<string>("");
@@ -15,15 +18,30 @@ export default function PostForm() {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      if(post && post.id){
+        const postRef = doc(db, "posts", post?.id);
+        await updateDoc(postRef,{
+          title,
+          summary,
+          content,
+          updatedAt: new Date()?.toLocaleDateString(),
+        });
+        navigate(`/posts/${post?.id}`);
+        toast?.success("게시글을 수정했습니다.")
+      }
+      else{
+
         await addDoc(collection(db, "posts"), {
           title,
           summary,
           content,
           createAt: new Date()?.toLocaleDateString(),
           email: user?.email,
+          uid: user?.uid,
         });
         toast?.success("게시글을 생성했습니다.")
         navigate("/");
+      }
     } catch (err: any) {
         toast?.error(err?.code);
     }
@@ -40,6 +58,33 @@ export default function PostForm() {
     if (name === "summary") setSummary(value);
     if (name === "content") setContent(value);
   };
+
+  const getPost = async (id: string) => {
+    if (id) {
+      const docRef = doc(db, "posts", id);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setPost({ id: docSnap.id, ...(docSnap.data() as PostProps) });
+      } else {
+        setPost(null);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      getPost(id);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (post) {
+      setTitle(post?.title);
+      setSummary(post?.summary);
+      setContent(post?.content);
+    }
+  }, [post]);
 
   return (
     <form onSubmit={onSubmit} className="form">
@@ -76,7 +121,7 @@ export default function PostForm() {
         />
       </div>
       <div className="form__block">
-        <input type="submit" value="제출" className="form__btn--submit" />
+        <input type="submit" value={post ? "수정" : "제출"} className="form__btn--submit" />
       </div>
     </form>
   );
