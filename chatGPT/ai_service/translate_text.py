@@ -1,8 +1,9 @@
+import os
 from openai import OpenAI
 import streamlit as st
 
 client = OpenAI(
-  api_key="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"
+  api_key=os.environ['OPENAI_API_KEY']
 )
 
 def translate_text(text, src_lang, trg_lang):
