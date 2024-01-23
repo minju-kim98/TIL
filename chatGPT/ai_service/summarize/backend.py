@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 
 client = OpenAI(
-  api_key="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"
+  api_key=os.environ['OPENAI_API_KEY']
 )
 
 class SloganGenerator:
