@@ -1,7 +1,7 @@
 import os
 from typing import List
 from openai import OpenAI
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
 from pydantic import BaseModel
 
 client = OpenAI(
@@ -27,3 +27,25 @@ app = FastAPI()
 def post_chat(messages: Messages):
     assistant_turn = chat(messages.messages)
     return assistant_turn
+
+@app.post("/transcribe")
+def transcribe_audio(audio_file: UploadFile = File(...)):
+    try:
+        filename = "tmp_audio_file.wav"
+        with open(filename, "wb") as f:
+            f.write(audio_file.file.read())
+
+        with open(filename, "rb") as f:
+            transcription = client.audio.transcriptions.create(
+                model="whisper-1", 
+                file=f,
+                response_format="text"
+            )
+
+        # Access the transcribed text from the top alternative
+        text = transcription
+    except Exception as e:
+        print(e)
+        text = f"Failed to transcribe. {e}"
+
+    return {"text": text}

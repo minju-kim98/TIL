@@ -1,18 +1,30 @@
+import io
 import streamlit as st
 from streamlit_chat import message
+from st_audiorec import st_audiorec
 import requests
 
 if "messages" not in st.session_state:
-    st.session_state['messages'] = [{"role": "user", "content": "blahblahblah"},
-                                    {"role": "assistant", "content": "저는 인공지능 어시스턴트로, OpenAI에서 개발된 GPT-3 모델을 기반으로 동작합니다. 당신이 필요로 하는 다양한 질문을 해주세요."}]
+    st.session_state['messages'] = []
 
-chat_url = "http://localhost:8000/chat"
+host_url = "http://localhost:8000"
+chat_url = f"{host_url}/chat"
+transcribe_url = f"{host_url}/transcribe"
+
+def stt(audio_bytes):
+    audio_file = io.BytesIO(audio_bytes)
+    files = {"audio_file": ("audio.wav", audio_file, "audio/wav")}
+    response = requests.post(transcribe_url, files=files)
+    text = response.json()['text']
+    return text
+
+
 
 def chat(text):
     user_turn = {"role": "user", "content": text}
     messages = st.session_state["messages"]
     resp = requests.post(chat_url, json={"messages": messages + [user_turn]})
-    assistant_turn = resp.json().to_dict()
+    assistant_turn = dict({"role": "assistant","content": resp.json()})
 
     st.session_state['messages'].append(user_turn)
     st.session_state['messages'].append(assistant_turn)
@@ -20,14 +32,30 @@ def chat(text):
 
 st.title("쳇봇 서비스")
 
-input_text = st.text_input("You")
-if input_text:
-    chat(input_text)
+row1 = st.container()
+row2 = st.container()
 
-for i, msg_obj in enumerate(st.session_state['messages']):
-    msg = msg_obj['content']
-    is_user = False
-    if i % 2 == 0:
-        is_user = True
+with row2:
+    # input_text = st.text_input("You")
+    # if input_text:
+    #     chat(input_text)
     
-    message(msg, is_user = is_user, key=f"chat_{i}")
+    wav_audio_data = st_audiorec()
+
+    if wav_audio_data is not None:
+        st.audio(wav_audio_data, format='audio/wav')
+
+        audio_bytes = wav_audio_data
+        st.audio(audio_bytes)
+
+        text = stt(audio_bytes)
+        chat(text)
+
+with row1:
+    for i, msg_obj in enumerate(st.session_state['messages']):
+        msg = msg_obj['content']
+        is_user = False
+        if i % 2 == 0:
+            is_user = True
+        
+        message(msg, is_user = is_user, key=f"chat_{i}")
